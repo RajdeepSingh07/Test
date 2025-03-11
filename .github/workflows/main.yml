@@ -1,26 +1,22 @@
-name: CI Workflow
+name: Install Dependencies on Push
 
 on:
   push:
     branches:
-      - main
-      - develop
+      - "*"
 
 jobs:
-  build:
+  install-dependencies:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: "3.x"
+          node-version: '18'
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run Tests
-        run: pytest
+      - name: Install dependencies
+        run: npm install
